@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using Geolocation.DataAccess;
+using Geolocation.DataAccess.Entities;
 using Geolocation.Domain.Interfaces;
 
 namespace Geolocation.App.Controllers
@@ -26,7 +26,8 @@ namespace Geolocation.App.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _context.Get());
+            var result = await _context.Get();
+            return Ok(result);
         }
 
         /// <summary>

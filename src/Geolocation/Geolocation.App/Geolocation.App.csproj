@@ -8,11 +8,17 @@
     <PackageReference Include="Dadata" Version="21.12.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Geolocation.DataAccess\Geolocation.DataAccess.csproj" />
     <ProjectReference Include="..\Geolocation.Domain\Geolocation.Domain.csproj" />
+    <ProjectReference Include="..\Geolocation.Infrastructure\Geolocation.Infrastructure.csproj" />
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <PropertyGroup>

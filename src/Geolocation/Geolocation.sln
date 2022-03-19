@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.App", "Geolocat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.Domain", "Geolocation.Domain\Geolocation.Domain.csproj", "{0DAC39B3-B11D-437C-9BE9-0B4C8B10402A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.DataAccess", "Geolocation.DataAccess\Geolocation.DataAccess.csproj", "{3208CC77-7AC3-499E-9D4B-F4651455FE22}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.Infrastructure", "Geolocation.Infrastructure\Geolocation.Infrastructure.csproj", "{4D115922-B6D5-4683-8AF1-F20A70A19F94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{0DAC39B3-B11D-437C-9BE9-0B4C8B10402A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DAC39B3-B11D-437C-9BE9-0B4C8B10402A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DAC39B3-B11D-437C-9BE9-0B4C8B10402A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3208CC77-7AC3-499E-9D4B-F4651455FE22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3208CC77-7AC3-499E-9D4B-F4651455FE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3208CC77-7AC3-499E-9D4B-F4651455FE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3208CC77-7AC3-499E-9D4B-F4651455FE22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D115922-B6D5-4683-8AF1-F20A70A19F94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D115922-B6D5-4683-8AF1-F20A70A19F94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D115922-B6D5-4683-8AF1-F20A70A19F94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D115922-B6D5-4683-8AF1-F20A70A19F94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

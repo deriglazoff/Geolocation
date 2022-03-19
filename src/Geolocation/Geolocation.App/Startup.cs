@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
@@ -9,9 +10,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Dadata;
 using Geolocation.App.Example;
-using Geolocation.DataAccess;
+using Geolocation.Domain.Interfaces;
+using Geolocation.Infrastructure;
+using Geolocation.Infrastructure.Saga;
+using MassTransit;
+using MassTransit.Definition;
+using MassTransit.EntityFrameworkCoreIntegration;
 using Microsoft.EntityFrameworkCore;
-using IGeolocationContext = Geolocation.Domain.Interfaces.IGeolocationContext;
+using Newtonsoft.Json.Converters;
 
 namespace Geolocation.App
 {
@@ -35,10 +41,38 @@ namespace Geolocation.App
                 ? services.AddTransient<ISuggestClientAsync, SuggestClientTest>()
                 : services.AddTransient<ISuggestClientAsync>(_ => new SuggestClientAsync(configuration.Token));
 
-            services.AddDbContext<IGeolocationContext, GeolocationContext>(c => c.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))));
+            services.AddDbContext<GeolocationContext>(c => c.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))));
+            services.AddScoped<IGeolocationContext, GeolocationContext>();
 
 
-            services.AddControllers();
+            services.AddMassTransit(x =>
+            {
+
+                x.AddSagaStateMachine<AddressStateMachine, AddressSaga>(typeof(AddressSagaDefinition))
+                    .EntityFrameworkRepository(r =>
+                    {
+                        r.UsePostgres();
+                        r.ConcurrencyMode = ConcurrencyMode.Optimistic;
+                        r.ExistingDbContext<GeolocationContext>();
+                    });
+
+                x.UsingRabbitMq((context, cfg) =>
+                {
+
+                    cfg.Host(Configuration.GetConnectionString("RabbitMq"));
+                    cfg.ConcurrentMessageLimit = 10;
+                    cfg.ConfigureEndpoints(context, SnakeCaseEndpointNameFormatter.Instance);
+                });
+            });
+
+            services.AddMassTransitHostedService();
+
+            services.AddControllers().AddNewtonsoftJson(o =>
+            {
+                o.SerializerSettings.Converters.Add(new StringEnumConverter());
+                o.SerializerSettings.Culture = new CultureInfo("ru-RU");
+            });
+
             services.AddSwaggerGen(options =>
             {
                 options.CustomOperationIds(e => $"{e.RelativePath.Replace("{", "").Replace("}", "")}{e.HttpMethod}");
@@ -47,17 +81,25 @@ namespace Geolocation.App
                 xmlFiles.ForEach(xmlFile => options.IncludeXmlComments(xmlFile));
 
             });
+            services.AddSwaggerGenNewtonsoftSupport();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var cultureInfo = new CultureInfo("ru-RU");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger(s => s.SerializeAsV2 = true);
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geolocation.App v1"));
             }
+
+            //using var service = app.ApplicationServices.CreateScope();
+            //service.ServiceProvider.GetService<GeolocationContext>()?.Database.Migrate();
 
             app.UseRouting();
 
