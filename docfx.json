@@ -1,0 +1,43 @@
+{
+  "metadata": [
+    {
+      "filter": "filterConfig.yml",
+      "src": [
+        {
+          "files": [ "**/*.sln", "src/**/*.csproj" ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "src"
+        }
+      ],
+      "dest": "obj/api"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [ "**/*.yml" ],
+        "src": "obj/api",
+        "dest": "api"
+      },
+      {
+        "files": [ "*.md", "toc.yml", "src/*", "src/**/swagger.json" ],
+        "exclude": [ "**/docker-*" ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "images/**" ]
+      }
+    ],
+    "xref": [ "xrefmap.yml" ],
+    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ],
+    "overwrite": "specs/*.md",
+    "globalMetadata": {
+      "_appTitle": "Geolocation",
+      "_enableSearch": true
+    },
+    "markdownEngineName": "markdig",
+    "dest": "_site"
+    //"C:\Users\deriglazov.v\source\repos\documentation\docfx\docfx.exe" docfx.json -t "default,templates/darkfx" --serve
+  }
+}

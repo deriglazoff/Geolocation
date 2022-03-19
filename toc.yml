@@ -1,0 +1,6 @@
+﻿- name: Home
+  href: README.md
+- name: API Documentation
+  href: obj/api/
+- name: REST API
+  href: src/Push.Client/swagger.html
