@@ -1,0 +1,128 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Geolocation.App",
+    "version": "v1"
+  },
+  "paths": {
+    "/Addresses": {
+      "get": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Список адресов.",
+        "operationId": "AddressesGET",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Addresses"
+        ],
+        "summary": "Список адресов.",
+        "operationId": "AddressesPOST",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AddressEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Geolocation": {
+      "get": {
+        "tags": [
+          "Geolocation"
+        ],
+        "summary": "Возвращает всю информацию об адресе по координатам. Работает для домов, улиц и городов.",
+        "operationId": "GeolocationGET",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "lat",
+            "description": "Географическая широта",
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "query",
+            "name": "lon",
+            "description": "Географическая долгота",
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AddressEntity": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "unrestrictedValue": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "kladrId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/AddressType"
+        },
+        "dateCreate": {
+          "format": "date-time",
+          "description": "Дата создания",
+          "type": "string"
+        },
+        "dateUpdate": {
+          "format": "date-time",
+          "description": "Дата изменения",
+          "type": "string"
+        }
+      }
+    },
+    "AddressType": {
+      "description": "Тип адреса",
+      "enum": [
+        "Registration",
+        "Home",
+        "Work"
+      ],
+      "type": "string"
+    }
+  }
+}

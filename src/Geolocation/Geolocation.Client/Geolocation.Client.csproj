@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.15.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <OpenApiReference Include="swagger.json">
+      <!--https://github.com/RicoSuter/NSwag/wiki/CSharpClientGeneratorSettings-->
+      <OutputPath>$(AssemblyName).cs</OutputPath>
+      <Options>/UseBaseUrl:false /GenerateClientInterfaces:true</Options>
+    </OpenApiReference>
+  </ItemGroup>
+
+
+</Project>
