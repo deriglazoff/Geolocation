@@ -1,0 +1,30 @@
+version: '3.4'
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: Geolocation
+      POSTGRES_USER: Geolocation
+      POSTGRES_DB: Geolocation
+    ports:
+      - 5432:5432
+
+  rabbitmq:
+    image: 'rabbitmq:3.6-management-alpine'
+    environment:
+      RABBITMQ_DEFAULT_VHOST: Geolocation
+      RABBITMQ_DEFAULT_USER: Geolocation
+      RABBITMQ_DEFAULT_PASS: Geolocation
+    ports:
+      # The standard AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+
+  geolocation.app:
+    image: ${DOCKER_REGISTRY-}geolocationapp
+    build:
+      context: .
+      dockerfile: Geolocation.App/Dockerfile
