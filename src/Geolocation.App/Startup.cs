@@ -16,6 +16,7 @@ using Geolocation.Infrastructure.Saga;
 using MassTransit;
 using MassTransit.Definition;
 using MassTransit.EntityFrameworkCoreIntegration;
+using MassTransit.RabbitMqTransport;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Converters;
 
@@ -59,7 +60,7 @@ namespace Geolocation.App
                 x.UsingRabbitMq((context, cfg) =>
                 {
 
-                    cfg.Host(Configuration.GetConnectionString("RabbitMq"));
+                    cfg.Host(Configuration.GetConnectionString(nameof(RabbitMqHostSettings)));
                     cfg.ConcurrentMessageLimit = 10;
                     cfg.ConfigureEndpoints(context, SnakeCaseEndpointNameFormatter.Instance);
                 });
