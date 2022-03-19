@@ -1,6 +1,5 @@
-namespace Geolocation.App.Dto
+namespace Geolocation.Domain.Dto
 {
-
     public class AddressDto
     {
         public string Value { get; set; }
@@ -14,6 +13,4 @@ namespace Geolocation.App.Dto
         public string KladrId { get; set; }
 
     }
-
-
 }

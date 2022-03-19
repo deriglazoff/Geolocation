@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Dadata;
-using Geolocation.App.Dto;
+using Geolocation.Domain.Dto;
 
 namespace Geolocation.App.Controllers
 {

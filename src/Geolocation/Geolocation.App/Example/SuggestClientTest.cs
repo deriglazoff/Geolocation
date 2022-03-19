@@ -6,6 +6,9 @@ using Dadata.Model;
 
 namespace Geolocation.App.Example
 {
+    /// <summary>
+    /// TODO Remove test object
+    /// </summary>
     public class SuggestClientTest : ISuggestClientAsync
     {
         public Task<SuggestResponse<Address>> SuggestAddress(string query, int count = 5, CancellationToken cancellationToken = new CancellationToken())
@@ -31,10 +34,32 @@ namespace Geolocation.App.Example
         public Task<SuggestResponse<Address>> Geolocate(double lat, double lon, int radius_meters = 100, int count = 5,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            
             var result = new SuggestResponse<Address>
             {
-                suggestions = new List<Suggestion<Address>>()
+                suggestions = new List<Suggestion<Address>>
+                {
+                    new()
+                    {
+                        data = new Address
+                        {
+                            postal_code = "309502",
+                            country = "Россия",
+                        },
+                        unrestricted_value = "Белгородская обл, г Старый Оскол, мкр Дубрава квартал 3, д 3",
+                        value = "309502, Белгородская обл, г Старый Оскол, мкр Дубрава квартал 3, д 3"
+                    },
+                    new()
+                    {
+                        data = new Address
+                        {
+                            postal_code = "309502",
+                            country = "Россия",
+                        },
+                        unrestricted_value = "Белгородская обл, г Старый Оскол, мкр Дубрава квартал 3, д 6 к б",
+                        value = "309502, Белгородская обл, г Старый Оскол, мкр Дубрава квартал 3, д 6 к б"
+                    }
+
+                }
             };
             return Task.FromResult(result);
         }

@@ -9,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Dadata;
 using Geolocation.App.Example;
+using Geolocation.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using IGeolocationContext = Geolocation.Domain.Interfaces.IGeolocationContext;
 
 namespace Geolocation.App
 {
@@ -31,6 +34,9 @@ namespace Geolocation.App
             _ = Configuration["Environment"] == Environments.Development
                 ? services.AddTransient<ISuggestClientAsync, SuggestClientTest>()
                 : services.AddTransient<ISuggestClientAsync>(_ => new SuggestClientAsync(configuration.Token));
+
+            services.AddDbContext<IGeolocationContext, GeolocationContext>(c => c.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))));
+
 
             services.AddControllers();
             services.AddSwaggerGen(options =>
