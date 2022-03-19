@@ -1,15 +1,14 @@
+using System;
+using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Dadata;
+using Geolocation.App.Example;
 
 namespace Geolocation.App
 {
@@ -25,11 +24,22 @@ namespace Geolocation.App
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddOptions();
+            services.Configure<AppSetting>(Configuration);
+            var configuration = Configuration.Get<AppSetting>();
+
+            _ = Configuration["Environment"] == Environments.Development
+                ? services.AddTransient<ISuggestClientAsync, SuggestClientTest>()
+                : services.AddTransient<ISuggestClientAsync>(_ => new SuggestClientAsync(configuration.Token));
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Geolocation.App", Version = "v1" });
+                options.CustomOperationIds(e => $"{e.RelativePath.Replace("{", "").Replace("}", "")}{e.HttpMethod}");
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = GetType().Namespace, Version = "v1" });
+                var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
+                xmlFiles.ForEach(xmlFile => options.IncludeXmlComments(xmlFile));
+
             });
         }
 
@@ -39,13 +49,11 @@ namespace Geolocation.App
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
+                app.UseSwagger(s => s.SerializeAsV2 = true);
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geolocation.App v1"));
             }
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
