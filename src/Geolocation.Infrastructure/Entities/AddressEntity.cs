@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Geolocation.Domain.Declare;
 using Geolocation.Domain.Interfaces;
 
-namespace Geolocation.DataAccess.Entities
+namespace Geolocation.Infrastructure.Entities
 {
     public class AddressEntity : IAddress
     {

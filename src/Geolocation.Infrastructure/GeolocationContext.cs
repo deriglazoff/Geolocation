@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Geolocation.DataAccess.Entities;
+using Geolocation.Domain.Declare;
 using Geolocation.Domain.Interfaces;
+using Geolocation.Infrastructure.Entities;
 using Geolocation.Infrastructure.Saga;
 using MassTransit.EntityFrameworkCoreIntegration;
 using MassTransit.EntityFrameworkCoreIntegration.Mappings;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Geolocation.Infrastructure
 {
@@ -24,6 +26,8 @@ namespace Geolocation.Infrastructure
 
         public DbSet<AddressEntity> Addresses { get; set; }
 
+        public DbSet<AddressTypeEntity> AddressTypes { get; set; }
+
         public async Task<IList<IAddress>> Get()
         {
             var result = await Addresses.ToListAsync();
@@ -37,6 +41,22 @@ namespace Geolocation.Infrastructure
                 CorrelationId = address.CorrelationId
             };
             await Addresses.AddAsync(entity);
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<AddressTypeEntity>()
+                .Property(c => c.Id)
+                .ValueGeneratedNever();
+
+            builder.Entity<AddressTypeEntity>().HasData(new List<AddressTypeEntity>
+            {
+                new()
+                {
+                    Id = AddressType.Home,
+                    Name = AddressType.Home.ToString(),
+                },
+            });
         }
     }
 }

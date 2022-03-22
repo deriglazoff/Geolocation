@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
-using Geolocation.DataAccess.Entities;
 using Geolocation.Domain.Interfaces;
+using Geolocation.Infrastructure.Entities;
 
 namespace Geolocation.App.Controllers
 {
