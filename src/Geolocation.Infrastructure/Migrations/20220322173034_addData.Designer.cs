@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Geolocation.Infrastructure.Migrations
 {
     [DbContext(typeof(GeolocationContext))]
-    [Migration("20220322154202_addData")]
+    [Migration("20220322173034_addData")]
     partial class addData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,8 +71,18 @@ namespace Geolocation.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
+                            Id = (byte)1,
+                            Name = "Registration"
+                        },
+                        new
+                        {
                             Id = (byte)2,
                             Name = "Home"
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = "Work"
                         });
                 });
 #pragma warning restore 612, 618

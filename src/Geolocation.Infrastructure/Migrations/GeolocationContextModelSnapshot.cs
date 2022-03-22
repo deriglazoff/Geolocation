@@ -69,8 +69,18 @@ namespace Geolocation.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
+                            Id = (byte)1,
+                            Name = "Registration"
+                        },
+                        new
+                        {
                             Id = (byte)2,
                             Name = "Home"
+                        },
+                        new
+                        {
+                            Id = (byte)3,
+                            Name = "Work"
                         });
                 });
 #pragma warning restore 612, 618

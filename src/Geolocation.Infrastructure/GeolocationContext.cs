@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Geolocation.Domain.Declare;
@@ -49,14 +50,14 @@ namespace Geolocation.Infrastructure
                 .Property(c => c.Id)
                 .ValueGeneratedNever();
 
-            builder.Entity<AddressTypeEntity>().HasData(new List<AddressTypeEntity>
-            {
-                new()
-                {
-                    Id = AddressType.Home,
-                    Name = AddressType.Home.ToString(),
-                },
-            });
+            builder.Entity<AddressTypeEntity>().HasData(
+                Enum.GetValues(typeof(AddressType)).Cast<AddressType>().ToList().Select(addressType =>
+                    new AddressTypeEntity
+                    {
+                        Id = addressType, 
+                        Name = addressType.ToString()
+                    }).ToList()
+            );
         }
     }
 }

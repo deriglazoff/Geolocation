@@ -25,7 +25,12 @@ namespace Geolocation.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AddressTypes",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { (byte)2, "Home" });
+                values: new object[,]
+                {
+                    { (byte)1, "Registration" },
+                    { (byte)2, "Home" },
+                    { (byte)3, "Work" }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
