@@ -11,15 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geolocation.Infrastructure"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C0DEB6EB-F6DC-4D99-86E4-B830B847B307}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "other", "other", "{259FEACF-A15C-4868-83F9-8CD002888666}"
-	ProjectSection(SolutionItems) = preProject
-		..\docfx.json = ..\docfx.json
-		..\filterConfig.yml = ..\filterConfig.yml
-		..\README.md = ..\README.md
-		..\toc.yml = ..\toc.yml
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geolocation.Client", "Geolocation.Client\Geolocation.Client.csproj", "{84608585-6D92-4083-8155-BF85962A916D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.Test", "..\Geolocation.Test\Geolocation.Test.csproj", "{ADE45857-C383-4334-A9CF-D22B182954CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +41,10 @@ Global
 		{84608585-6D92-4083-8155-BF85962A916D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84608585-6D92-4083-8155-BF85962A916D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84608585-6D92-4083-8155-BF85962A916D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADE45857-C383-4334-A9CF-D22B182954CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADE45857-C383-4334-A9CF-D22B182954CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADE45857-C383-4334-A9CF-D22B182954CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADE45857-C383-4334-A9CF-D22B182954CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
