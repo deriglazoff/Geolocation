@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using Dadata;
 using Geolocation.Domain.Dto;
+using Microsoft.AspNetCore.Http;
 
 namespace Geolocation.App.Controllers
 {
@@ -13,11 +13,8 @@ namespace Geolocation.App.Controllers
     {
         private readonly ISuggestClientAsync _client;
 
-        private readonly ILogger _logger;
-
-        public GeolocationController(ILogger<GeolocationController> logger, ISuggestClientAsync clientAsync)
+        public GeolocationController(ISuggestClientAsync clientAsync)
         {
-            _logger = logger;
             _client = clientAsync;
         }
 
@@ -27,6 +24,8 @@ namespace Geolocation.App.Controllers
         /// <param name="lat">Географическая широта</param>
         /// <param name="lon">Географическая долгота</param>
         [HttpGet]
+        [ProducesDefaultResponseType(typeof(ProblemDetails))]
+        [ProducesResponseType(typeof(AddressDto),StatusCodes.Status200OK)]
         public async Task<IActionResult > Get(double lat, double lon)
         {
             var response = await _client.Geolocate(lat, lon);

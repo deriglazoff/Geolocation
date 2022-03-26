@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Geolocation.Domain.Dto;
 using Geolocation.Domain.Interfaces;
-using Geolocation.Infrastructure.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace Geolocation.App.Controllers
 {
@@ -12,11 +14,9 @@ namespace Geolocation.App.Controllers
     {
         private readonly IGeolocationContext _context;
 
-        private readonly ILogger _logger;
 
-        public AddressesController(ILogger<AddressesController> logger, IGeolocationContext context)
+        public AddressesController(IGeolocationContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
@@ -24,18 +24,22 @@ namespace Geolocation.App.Controllers
         /// Список адресов.
         /// </summary>
         [HttpGet]
+        [ProducesDefaultResponseType(typeof(ProblemDetails))]
+        [ProducesResponseType(typeof(IEnumerable<IAddress>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
+            throw new Exception("das");
             var result = await _context.Get();
             return Ok(result);
         }
-
         /// <summary>
         /// Список адресов.
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> Insert(AddressEntity address)
+        [ProducesDefaultResponseType(typeof(ProblemDetails))]
+        public async Task<IActionResult> Insert(AddressDto address)
         {
+            throw new Exception("das");
             await _context.Insert(address);
             return Ok();
         }

@@ -42,6 +42,7 @@ namespace Geolocation.Infrastructure
                 CorrelationId = address.CorrelationId
             };
             await Addresses.AddAsync(entity);
+            await SaveChangesAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

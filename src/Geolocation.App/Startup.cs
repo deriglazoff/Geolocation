@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Dadata;
 using Geolocation.App.Example;
+using Geolocation.App.Filter;
 using Geolocation.Domain.Interfaces;
 using Geolocation.Infrastructure;
 using Geolocation.Infrastructure.Saga;
@@ -17,6 +19,7 @@ using MassTransit;
 using MassTransit.Definition;
 using MassTransit.EntityFrameworkCoreIntegration;
 using MassTransit.RabbitMqTransport;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Converters;
 
@@ -42,9 +45,9 @@ namespace Geolocation.App
                 ? services.AddTransient<ISuggestClientAsync, SuggestClientTest>()
                 : services.AddTransient<ISuggestClientAsync>(_ => new SuggestClientAsync(configuration.Token));
 
-            services.AddDbContext<GeolocationContext>(c => c.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))));
+            services.AddDbContext<GeolocationContext>(c =>
+                c.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))));
             services.AddScoped<IGeolocationContext, GeolocationContext>();
-
 
             services.AddMassTransit(x =>
             {
@@ -76,10 +79,11 @@ namespace Geolocation.App
 
             services.AddSwaggerGen(options =>
             {
-                options.CustomOperationIds(e => $"{e.RelativePath.Replace("{", "").Replace("}", "")}{e.HttpMethod}");
+                options.CustomOperationIds(e => $"{Regex.Replace(e.RelativePath, "{|}", "")}{e.HttpMethod}");
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = GetType().Namespace, Version = "v1" });
                 var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
                 xmlFiles.ForEach(xmlFile => options.IncludeXmlComments(xmlFile));
+                options.SchemaFilter<ExampleSchemaFilter>();
 
             });
             services.AddSwaggerGenNewtonsoftSupport();
@@ -100,9 +104,11 @@ namespace Geolocation.App
             }
 
             using var service = app.ApplicationServices.CreateScope();
-            service.ServiceProvider.GetService<GeolocationContext>()?.Database.Migrate();
+            service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
 
             app.UseRouting();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
