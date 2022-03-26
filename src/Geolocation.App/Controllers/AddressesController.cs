@@ -28,7 +28,6 @@ namespace Geolocation.App.Controllers
         [ProducesResponseType(typeof(IEnumerable<IAddress>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            throw new Exception("das");
             var result = await _context.Get();
             return Ok(result);
         }
@@ -37,9 +36,9 @@ namespace Geolocation.App.Controllers
         /// </summary>
         [HttpPost]
         [ProducesDefaultResponseType(typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> Insert(AddressDto address)
         {
-            throw new Exception("das");
             await _context.Insert(address);
             return Ok();
         }

@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,10 @@ using MassTransit.EntityFrameworkCoreIntegration;
 using MassTransit.RabbitMqTransport;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json.Converters;
+using Polly;
 
 namespace Geolocation.App
 {
@@ -41,14 +45,21 @@ namespace Geolocation.App
             services.Configure<AppSetting>(Configuration);
             var configuration = Configuration.Get<AppSetting>();
 
+            services.AddHttpClient<SuggestClientAsync>().AddTransientHttpErrorPolicy(policyBuilder =>
+                policyBuilder.WaitAndRetryAsync(2, retryNumber => TimeSpan.FromSeconds(1)));
+
             _ = Configuration["Environment"] == Environments.Development
                 ? services.AddTransient<ISuggestClientAsync, SuggestClientTest>()
-                : services.AddTransient<ISuggestClientAsync>(_ => new SuggestClientAsync(configuration.Token));
+                : services.AddTransient<ISuggestClientAsync>(x =>
+                    new SuggestClientAsync(configuration.Token));
 
-            services.AddDbContext<GeolocationContext>(c =>
-                c.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))));
+            services.AddSingleton<LogCommandInterceptor>();
+            services.AddDbContext<GeolocationContext>((provider, options) =>
+                options.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext)),
+                        builder => builder.EnableRetryOnFailure(2))
+                    .AddInterceptors(provider.GetRequiredService<LogCommandInterceptor>()));
+
             services.AddScoped<IGeolocationContext, GeolocationContext>();
-
             services.AddMassTransit(x =>
             {
 
@@ -69,7 +80,7 @@ namespace Geolocation.App
                 });
             });
 
-            services.AddMassTransitHostedService();
+            //services.AddMassTransitHostedService();
 
             services.AddControllers().AddNewtonsoftJson(o =>
             {
@@ -80,10 +91,11 @@ namespace Geolocation.App
             services.AddSwaggerGen(options =>
             {
                 options.CustomOperationIds(e => $"{Regex.Replace(e.RelativePath, "{|}", "")}{e.HttpMethod}");
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = GetType().Namespace, Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo {Title = GetType().Namespace, Version = "v1"});
                 var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
                 xmlFiles.ForEach(xmlFile => options.IncludeXmlComments(xmlFile));
                 options.SchemaFilter<ExampleSchemaFilter>();
+                //options.AddServer(new OpenApiServer {Url = Configuration["ASPNETCORE_URLS"]});
 
             });
             services.AddSwaggerGenNewtonsoftSupport();
@@ -99,20 +111,25 @@ namespace Geolocation.App
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger(s => s.SerializeAsV2 = true);
+                app.UseSwagger(s => s.SerializeAsV2 = false);
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geolocation.App v1"));
             }
 
-            using var service = app.ApplicationServices.CreateScope();
-            service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
+            //using var service = app.ApplicationServices.CreateScope();
+            //service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
 
             app.UseRouting();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
+            app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGet(string.Empty,
+                    async context => await context.Response.WriteAsync(GetType().Assembly.ToString())
+                );
             });
         }
     }

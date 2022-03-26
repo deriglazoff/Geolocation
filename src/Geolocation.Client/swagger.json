@@ -1,4 +1,4 @@
-{
+п»ї{
   "swagger": "2.0",
   "info": {
     "title": "Geolocation.App",
@@ -10,11 +10,28 @@
         "tags": [
           "Addresses"
         ],
-        "summary": "Список адресов.",
+        "summary": "РЎРїРёСЃРѕРє Р°РґСЂРµСЃРѕРІ.",
         "operationId": "AddressesGET",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IAddress"
+              }
+            }
           }
         }
       },
@@ -22,7 +39,7 @@
         "tags": [
           "Addresses"
         ],
-        "summary": "Список адресов.",
+        "summary": "РЎРїРёСЃРѕРє Р°РґСЂРµСЃРѕРІ.",
         "operationId": "AddressesPOST",
         "consumes": [
           "application/json-patch+json",
@@ -30,16 +47,27 @@
           "text/json",
           "application/*+json"
         ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/AddressEntity"
+              "$ref": "#/definitions/AddressDto"
             }
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
           "200": {
             "description": "Success"
           }
@@ -51,34 +79,51 @@
         "tags": [
           "Geolocation"
         ],
-        "summary": "Возвращает всю информацию об адресе по координатам. Работает для домов, улиц и городов.",
+        "summary": "Р’РѕР·РІСЂР°С‰Р°РµС‚ РІСЃСЋ РёРЅС„РѕСЂРјР°С†РёСЋ РѕР± Р°РґСЂРµСЃРµ РїРѕ РєРѕРѕСЂРґРёРЅР°С‚Р°Рј. Р Р°Р±РѕС‚Р°РµС‚ РґР»СЏ РґРѕРјРѕРІ, СѓР»РёС† Рё РіРѕСЂРѕРґРѕРІ.",
         "operationId": "GeolocationGET",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "in": "query",
             "name": "lat",
-            "description": "Географическая широта",
+            "description": "Р“РµРѕРіСЂР°С„РёС‡РµСЃРєР°СЏ С€РёСЂРѕС‚Р°",
             "type": "number",
             "format": "double"
           },
           {
             "in": "query",
             "name": "lon",
-            "description": "Географическая долгота",
+            "description": "Р“РµРѕРіСЂР°С„РёС‡РµСЃРєР°СЏ РґРѕР»РіРѕС‚Р°",
             "type": "number",
             "format": "double"
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AddressDto"
+            }
           }
         }
       }
     }
   },
   "definitions": {
-    "AddressEntity": {
+    "AddressDto": {
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "correlationId": {
@@ -102,27 +147,69 @@
         },
         "type": {
           "$ref": "#/definitions/AddressType"
-        },
-        "dateCreate": {
-          "format": "date-time",
-          "description": "Дата создания",
-          "type": "string"
-        },
-        "dateUpdate": {
-          "format": "date-time",
-          "description": "Дата изменения",
-          "type": "string"
         }
-      }
+      },
+      "example": "{\n  \"CorrelationId\": \"92f522d0-b88c-4299-a7d0-43b70600f939\",\n  \"Value\": \"Р‘РµР»РіРѕСЂРѕРґСЃРєР°СЏ РѕР±Р», Рі РЎС‚Р°СЂС‹Р№ РћСЃРєРѕР», РјРєСЂ Р”СѓР±СЂР°РІР° РєРІР°СЂС‚Р°Р» 3\",\n  \"UnrestrictedValue\": \"309502, Р‘РµР»РіРѕСЂРѕРґСЃРєР°СЏ РѕР±Р», Рі РЎС‚Р°СЂС‹Р№ РћСЃРєРѕР», РјРєСЂ Р”СѓР±СЂР°РІР° РєРІР°СЂС‚Р°Р» 3\",\n  \"PostalCode\": \"309502\",\n  \"Country\": \"Р РѕСЃСЃРёСЏ\",\n  \"KladrId\": \"3100000200004070007\",\n  \"Type\": \"Work\"\n}"
     },
     "AddressType": {
-      "description": "Тип адреса",
+      "description": "РўРёРї Р°РґСЂРµСЃР°",
       "enum": [
         "Registration",
         "Home",
         "Work"
       ],
       "type": "string"
+    },
+    "IAddress": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "unrestrictedValue": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "kladrId": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/AddressType"
+        }
+      },
+      "example": "{\n  \"CorrelationId\": \"92f522d0-b88c-4299-a7d0-43b70600f939\",\n  \"Value\": \"Р‘РµР»РіРѕСЂРѕРґСЃРєР°СЏ РѕР±Р», Рі РЎС‚Р°СЂС‹Р№ РћСЃРєРѕР», РјРєСЂ Р”СѓР±СЂР°РІР° РєРІР°СЂС‚Р°Р» 3\",\n  \"UnrestrictedValue\": \"309502, Р‘РµР»РіРѕСЂРѕРґСЃРєР°СЏ РѕР±Р», Рі РЎС‚Р°СЂС‹Р№ РћСЃРєРѕР», РјРєСЂ Р”СѓР±СЂР°РІР° РєРІР°СЂС‚Р°Р» 3\",\n  \"PostalCode\": \"309502\",\n  \"Country\": \"Р РѕСЃСЃРёСЏ\",\n  \"KladrId\": \"3100000200004070007\",\n  \"Type\": \"Work\"\n}"
+    },
+    "ProblemDetails": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "status": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {},
+      "example": "{\n  \"Type\": \"Microsoft.AspNetCore.Http.BadHttpRequestException\",\n  \"Title\": \"One or more validation errors occurred\",\n  \"Status\": 400,\n  \"Extensions\": {}\n}"
     }
   }
 }

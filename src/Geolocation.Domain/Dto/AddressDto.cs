@@ -17,6 +17,7 @@ namespace Geolocation.Domain.Dto
 
         public string Country { get; set; }
 
+        [Required]
         public string KladrId { get; set; }
 
         public AddressType Type { get; set; }
