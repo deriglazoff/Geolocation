@@ -80,7 +80,7 @@ namespace Geolocation.App
                 });
             });
 
-            //services.AddMassTransitHostedService();
+            services.AddMassTransitHostedService();
 
             services.AddControllers().AddNewtonsoftJson(o =>
             {
@@ -115,8 +115,8 @@ namespace Geolocation.App
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geolocation.App v1"));
             }
 
-            //using var service = app.ApplicationServices.CreateScope();
-            //service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
+            using var service = app.ApplicationServices.CreateScope();
+            service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
 
             app.UseRouting();
 
