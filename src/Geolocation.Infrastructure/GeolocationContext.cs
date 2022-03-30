@@ -56,6 +56,8 @@ namespace Geolocation.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
+
             builder.Entity<AddressTypeEntity>()
                 .Property(c => c.Id)
                 .ValueGeneratedNever();

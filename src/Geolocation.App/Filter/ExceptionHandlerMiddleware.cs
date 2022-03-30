@@ -33,7 +33,7 @@ namespace Geolocation.App.Filter
 
         private async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            _logger.LogWarning(exception, "Îøèáêà");
+            _logger.LogCritical(exception, "Îøèáêà");
             context.Response.StatusCode = exception switch
             {
                 BadHttpRequestException => (int) HttpStatusCode.BadRequest,
@@ -45,6 +45,7 @@ namespace Geolocation.App.Filter
                 Status = context.Response.StatusCode,
                 Type = exception.GetType().FullName,
                 Title = exception.Message,
+                Detail = exception.ToString()
             };
 
             await context.Response.WriteAsJsonAsync(problemDetails).ConfigureAwait(false);

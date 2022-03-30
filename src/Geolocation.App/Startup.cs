@@ -54,8 +54,9 @@ namespace Geolocation.App
 
             services.AddSingleton<LogCommandInterceptor>();
             services.AddDbContext<GeolocationContext>((provider, options) =>
-                options.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext)),
-                        builder => builder.EnableRetryOnFailure(2))
+                options.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))
+                        //, builder => builder.EnableRetryOnFailure(2)
+                        )
                     .AddInterceptors(provider.GetRequiredService<LogCommandInterceptor>()));
 
             services.AddTransient<IRepository<IAddress>, GeolocationContext>();
@@ -127,8 +128,8 @@ namespace Geolocation.App
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geolocation.App v1"));
             }
 
-            //using var service = app.ApplicationServices.CreateScope();
-            //service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
+            using var service = app.ApplicationServices.CreateScope();
+            service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
 
             app.UseRouting();
 
