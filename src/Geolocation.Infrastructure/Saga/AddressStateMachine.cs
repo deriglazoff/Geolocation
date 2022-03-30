@@ -16,6 +16,8 @@ namespace Geolocation.Infrastructure.Saga
 
             Event(() => FaultAddressNew, x => x.CorrelateById(x => x.Message.Message.CorrelationId));
 
+            Event(() => RemoveSaga, x => x.CorrelateById(x => x.Message.Message.CorrelationId));
+
             InstanceState(instance => instance.CurrentState);
 
             Initially(
@@ -25,6 +27,12 @@ namespace Geolocation.Infrastructure.Saga
             DuringAny(
                 HandlerError(FaultAddressNew)
                     .TransitionTo(Fault));
+
+            DuringAny(
+                When(RemoveSaga)
+                    .Finalize());
+
+            SetCompletedWhenFinalized();
 
             WhenEnterAny(state => state
                 .Then(context =>
@@ -70,6 +78,12 @@ namespace Geolocation.Infrastructure.Saga
         /// Произошла ошибка 
         /// </summary>
         public Event<Fault<AddressNewEvent>> FaultAddressNew { get; private set; }
+
+        /// <summary>
+        /// Удаление 
+        /// </summary>
+        public Event<Fault<RemoveSagaEvent>> RemoveSaga { get; private set; }
+
 
         /// <summary>
         /// Новый Push 

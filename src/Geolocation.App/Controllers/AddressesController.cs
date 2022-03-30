@@ -12,12 +12,13 @@ namespace Geolocation.App.Controllers
     [Route("[controller]")]
     public class AddressesController : ControllerBase
     {
-        private readonly IGeolocationContext _context;
+        private readonly IRepository<IAddress> _context;
 
-
-        public AddressesController(IGeolocationContext context)
+        private readonly IRunner _job;
+        public AddressesController(IRepository<IAddress> context, IRunner job)
         {
             _context = context;
+            _job = job;
         }
 
         /// <summary>
@@ -40,6 +41,18 @@ namespace Geolocation.App.Controllers
         public async Task<IActionResult> Insert(AddressDto address)
         {
             await _context.Insert(address);
+            return Ok();
+        }
+
+        /// <summary>
+        /// Список адресов.
+        /// </summary>
+        [HttpDelete]
+        [ProducesDefaultResponseType(typeof(ProblemDetails))]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Remove()
+        {
+            Response.OnCompleted(async () => await _job.Run());
             return Ok();
         }
     }

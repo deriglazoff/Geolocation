@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 
 namespace Geolocation.Domain.Interfaces
 {
-    public interface IGeolocationContext
+    public interface IRepository<T> where T : class
     {
-        public Task<IList<IAddress>> Get();
+        public Task<IList<T>> Get();
 
-        public Task Insert(IAddress address);
+        public Task Insert(T entity);
+
+        public Task<IList<T>> GetOld();
     }
 }

@@ -9,11 +9,10 @@ using Geolocation.Infrastructure.Saga;
 using MassTransit.EntityFrameworkCoreIntegration;
 using MassTransit.EntityFrameworkCoreIntegration.Mappings;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Geolocation.Infrastructure
 {
-    public class GeolocationContext : SagaDbContext, IGeolocationContext
+    public class GeolocationContext : SagaDbContext, IRepository<IAddress>
     {
         public GeolocationContext(DbContextOptions options)
             : base(options)
@@ -25,6 +24,8 @@ namespace Geolocation.Infrastructure
             get { yield return new AddressSagaStateMap(); }
         }
 
+        public DbSet<AddressSaga> AddressSagas { get; set; }
+
         public DbSet<AddressEntity> Addresses { get; set; }
 
         public DbSet<AddressTypeEntity> AddressTypes { get; set; }
@@ -34,6 +35,7 @@ namespace Geolocation.Infrastructure
             var result = await Addresses.ToListAsync();
             return result.ToList<IAddress>();
         }
+
 
         public async Task Insert(IAddress address)
         {
@@ -45,6 +47,13 @@ namespace Geolocation.Infrastructure
             await SaveChangesAsync();
         }
 
+        public async Task<IList<IAddress>> GetOld()
+        {
+            var result = await AddressSagas.Where(e => e.DateUpdate < DateTime.UtcNow.AddDays(-1)).ToListAsync();
+            return result.ToList<IAddress>();
+        }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<AddressTypeEntity>()
@@ -55,10 +64,11 @@ namespace Geolocation.Infrastructure
                 Enum.GetValues(typeof(AddressType)).Cast<AddressType>().ToList().Select(addressType =>
                     new AddressTypeEntity
                     {
-                        Id = addressType, 
+                        Id = addressType,
                         Name = addressType.ToString()
                     }).ToList()
             );
         }
+
     }
 }

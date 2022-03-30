@@ -10,6 +10,8 @@ namespace Geolocation.Infrastructure.Saga
         protected override void Configure(EntityTypeBuilder<AddressSaga> entity, ModelBuilder model)
         {
             entity.ToTable(GetType().Name);
+
+            entity.HasKey(c => c.CorrelationId);
         }
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using Dadata;
 using Geolocation.App.Example;
 using Geolocation.App.Filter;
+using Geolocation.App.Jobs;
 using Geolocation.Domain.Interfaces;
 using Geolocation.Infrastructure;
 using Geolocation.Infrastructure.Saga;
@@ -22,10 +22,9 @@ using MassTransit.EntityFrameworkCoreIntegration;
 using MassTransit.RabbitMqTransport;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json.Converters;
 using Polly;
+using Quartz;
 
 namespace Geolocation.App
 {
@@ -59,7 +58,19 @@ namespace Geolocation.App
                         builder => builder.EnableRetryOnFailure(2))
                     .AddInterceptors(provider.GetRequiredService<LogCommandInterceptor>()));
 
-            services.AddScoped<IGeolocationContext, GeolocationContext>();
+            services.AddTransient<IRepository<IAddress>, GeolocationContext>();
+
+            services.AddQuartz(q =>
+            {
+                q.UseMicrosoftDependencyInjectionJobFactory();
+                // Register the job, loading the schedule from configuration
+                q.AddJobAndTrigger<RemoveOldJob>(configuration.CronSchedule);
+
+            });
+            services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
+
+            services.AddScoped<IRunner, RemoveOldJob>();
+
             services.AddMassTransit(x =>
             {
 
@@ -90,6 +101,7 @@ namespace Geolocation.App
 
             services.AddSwaggerGen(options =>
             {
+                options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 options.CustomOperationIds(e => $"{Regex.Replace(e.RelativePath, "{|}", "")}{e.HttpMethod}");
                 options.SwaggerDoc("v1", new OpenApiInfo {Title = GetType().Namespace, Version = "v1"});
                 var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
@@ -115,8 +127,8 @@ namespace Geolocation.App
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geolocation.App v1"));
             }
 
-            using var service = app.ApplicationServices.CreateScope();
-            service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
+            //using var service = app.ApplicationServices.CreateScope();
+            //service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
 
             app.UseRouting();
 

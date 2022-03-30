@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -17,15 +18,32 @@ namespace Geolocation.Infrastructure
 
         public override InterceptionResult<DbDataReader> ReaderExecuting(DbCommand command, CommandEventData eventData, InterceptionResult<DbDataReader> result)
         {
-            _logger.LogInformation(command.CommandText);
-            return base.ReaderExecuting(command, eventData, result);
+            try
+            {
+                _logger.LogInformation(command.CommandText);
+                return base.ReaderExecuting(command, eventData, result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(DbCommand command, CommandEventData eventData, InterceptionResult<DbDataReader> result,
             CancellationToken cancellationToken = new CancellationToken())
         {
-            _logger.LogInformation(command.CommandText);
-            return base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
+            try
+            {
+                _logger.LogInformation(command.CommandText);
+                return base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
         /// <summary>
         /// TODO debug list params

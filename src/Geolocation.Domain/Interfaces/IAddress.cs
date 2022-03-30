@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Geolocation.Domain.Declare;
 
 namespace Geolocation.Domain.Interfaces
 {
     public interface IAddress
     {
+        /// <summary>
+        /// ID корреляции
+        /// </summary>
         public Guid CorrelationId  { get; set; }
         public string Value { get; set; }
 
@@ -17,6 +21,12 @@ namespace Geolocation.Domain.Interfaces
         public string KladrId { get; set; }
 
         public AddressType Type { get; set; }
+
+    }
+
+    public interface IRunner
+    {
+        public Task Run();
 
     }
 }
