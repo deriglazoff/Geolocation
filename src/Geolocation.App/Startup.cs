@@ -121,7 +121,7 @@ namespace Geolocation.App
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            if (env.IsDevelopment())
+            if (!env.IsProduction())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger(s => s.SerializeAsV2 = false);
@@ -134,6 +134,8 @@ namespace Geolocation.App
             app.UseRouting();
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            app.UseMiddleware<HttpRequestLoggingMiddleware>();
 
             app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
