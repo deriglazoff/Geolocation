@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 namespace Geolocation.App.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class GeolocationController : ControllerBase
     {
         private readonly ISuggestClientAsync _client;

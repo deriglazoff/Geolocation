@@ -13,6 +13,10 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geolocation.Client", "Geolocation.Client\Geolocation.Client.csproj", "{84608585-6D92-4083-8155-BF85962A916D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.Test", "Geolocation.Test\Geolocation.Test.csproj", "{F74B633B-551A-4AB1-8660-F45ECE5D04B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.Gateway", "Geolocation.Gateway\Geolocation.Gateway.csproj", "{FC11859E-1201-4996-8470-E0893C228659}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{84608585-6D92-4083-8155-BF85962A916D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84608585-6D92-4083-8155-BF85962A916D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84608585-6D92-4083-8155-BF85962A916D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F74B633B-551A-4AB1-8660-F45ECE5D04B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F74B633B-551A-4AB1-8660-F45ECE5D04B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F74B633B-551A-4AB1-8660-F45ECE5D04B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F74B633B-551A-4AB1-8660-F45ECE5D04B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC11859E-1201-4996-8470-E0893C228659}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC11859E-1201-4996-8470-E0893C228659}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC11859E-1201-4996-8470-E0893C228659}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC11859E-1201-4996-8470-E0893C228659}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

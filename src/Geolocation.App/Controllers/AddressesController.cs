@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 namespace Geolocation.App.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AddressesController : ControllerBase
     {
         private readonly IRepository<IAddress> _context;

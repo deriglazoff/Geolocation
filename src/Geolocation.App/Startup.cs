@@ -53,12 +53,9 @@ namespace Geolocation.App
                 : services.AddTransient<ISuggestClientAsync>(x =>
                     new SuggestClientAsync(configuration.Token));
 
-            services.AddSingleton<LogCommandInterceptor>();
-            services.AddDbContext<GeolocationContext>((provider, options) =>
+            services.AddDbContext<GeolocationContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString(nameof(GeolocationContext))
-                        //, builder => builder.EnableRetryOnFailure(2)
-                        )
-                    .AddInterceptors(provider.GetRequiredService<LogCommandInterceptor>()));
+                ));
 
             services.AddSingleton<IDbContextSqlServer, DbContextSqlServer>();
 
@@ -139,7 +136,7 @@ namespace Geolocation.App
 
             app.UseMiddleware<HttpRequestLoggingMiddleware>();
 
-            app.UseCors(c => c.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

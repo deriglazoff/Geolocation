@@ -28,3 +28,10 @@ services:
     build:
       context: .
       dockerfile: Geolocation.App/Dockerfile
+
+  geolocation.gateway:
+    image: ${DOCKER_REGISTRY-}geolocationgateway
+    build:
+      context: .
+      dockerfile: Geolocation.Gateway/Dockerfile
+
