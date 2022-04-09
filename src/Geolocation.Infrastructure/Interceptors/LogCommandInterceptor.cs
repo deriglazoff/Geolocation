@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Logging;
 
-namespace Geolocation.Infrastructure
+namespace Geolocation.Infrastructure.Interceptors
 {
     public class LogCommandInterceptor : DbCommandInterceptor
     {
@@ -15,17 +17,19 @@ namespace Geolocation.Infrastructure
         {
             _logger = logger;
         }
-
         public override InterceptionResult<DbDataReader> ReaderExecuting(DbCommand command, CommandEventData eventData,
             InterceptionResult<DbDataReader> result)
         {
-            _logger.LogInformation(command.CommandText);
+            _logger.LogDebug(command.CommandText);
             return base.ReaderExecuting(command, eventData, result);
         }
 
-        public override void CommandFailed(DbCommand command, CommandErrorEventData eventData)
+        public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(DbCommand command,
+            CommandEventData eventData, InterceptionResult<DbDataReader> result,
+            CancellationToken cancellationToken = new CancellationToken())
         {
-            throw new Exception("Ошибка БД", eventData.Exception);
+            _logger.LogDebug(command.CommandText);
+            return base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
         }
 
         public override async Task CommandFailedAsync(DbCommand command, CommandErrorEventData eventData,
@@ -34,27 +38,20 @@ namespace Geolocation.Infrastructure
             CommandFailed(command, eventData);
         }
 
-        public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(DbCommand command,
-            CommandEventData eventData, InterceptionResult<DbDataReader> result,
-            CancellationToken cancellationToken = new CancellationToken())
+        public override void CommandFailed(DbCommand command, CommandErrorEventData eventData)
         {
-            _logger.LogInformation(command.CommandText);
-            return base.ReaderExecutingAsync(command, eventData, result, cancellationToken);
+            throw new Exception("Ошибка БД", eventData.Exception) {Data = {{ "Query", GetGeneratedQuery(command)}}};
         }
 
         /// <summary>
         /// TODO debug list params
         /// </summary>
-        public static string GetGeneratedQuery(DbCommand dbCommand)
+        public static string GetGeneratedQuery([NotNull] DbCommand dbCommand)
         {
-
-            var query = dbCommand.CommandText;
-            foreach (DbParameter parameter in dbCommand.Parameters)
-            {
-                query = query.Replace(parameter.ParameterName, parameter.Value.ToString());
-            }
-
-            return query;
+            return dbCommand.Parameters.Cast<DbParameter>().Aggregate(dbCommand.CommandText,
+                (current, parameter) => current.Replace(parameter.ParameterName, parameter.Value?.ToString()));
         }
     }
+
+
 }

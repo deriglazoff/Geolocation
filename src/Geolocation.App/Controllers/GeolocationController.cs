@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Dadata;
 using Geolocation.Domain.Dto;
+using Geolocation.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace Geolocation.App.Controllers
@@ -13,9 +14,12 @@ namespace Geolocation.App.Controllers
     {
         private readonly ISuggestClientAsync _client;
 
-        public GeolocationController(ISuggestClientAsync clientAsync)
+        private readonly IDbContextSqlServer _contextSql;
+
+        public GeolocationController(ISuggestClientAsync clientAsync, IDbContextSqlServer contextSql)
         {
             _client = clientAsync;
+            _contextSql = contextSql;
         }
 
         /// <summary>
@@ -38,6 +42,15 @@ namespace Geolocation.App.Controllers
                 UnrestrictedValue = c.unrestricted_value
             });
             return Ok(result.FirstOrDefault());
+        }
+
+        [HttpPost]
+        [ProducesDefaultResponseType(typeof(ProblemDetails))]
+        [ProducesResponseType( StatusCodes.Status200OK)]
+        public async Task<IActionResult> CheckStateDatabase(string body)
+        {
+            await _contextSql.CheckStateDatabase(body);
+            return Ok();
         }
     }
 }

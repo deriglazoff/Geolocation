@@ -54,7 +54,6 @@ namespace Geolocation.App.Filter
             }
             catch (Exception ex)
             {
-                var a = ex.ToString();
                 throw new CoreHttpException(ex, logEnrich);
             }
             finally

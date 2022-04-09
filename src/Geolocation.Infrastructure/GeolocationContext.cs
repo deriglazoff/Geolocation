@@ -14,7 +14,7 @@ namespace Geolocation.Infrastructure
 {
     public class GeolocationContext : SagaDbContext, IRepository<IAddress>
     {
-        public GeolocationContext(DbContextOptions options)
+        public GeolocationContext(DbContextOptions<GeolocationContext> options)
             : base(options)
         {
         }

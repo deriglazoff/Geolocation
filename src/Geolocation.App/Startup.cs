@@ -15,6 +15,7 @@ using Geolocation.App.Filter;
 using Geolocation.App.Jobs;
 using Geolocation.Domain.Interfaces;
 using Geolocation.Infrastructure;
+using Geolocation.Infrastructure.Interceptors;
 using Geolocation.Infrastructure.Saga;
 using MassTransit;
 using MassTransit.Definition;
@@ -58,6 +59,8 @@ namespace Geolocation.App
                         //, builder => builder.EnableRetryOnFailure(2)
                         )
                     .AddInterceptors(provider.GetRequiredService<LogCommandInterceptor>()));
+
+            services.AddSingleton<IDbContextSqlServer, DbContextSqlServer>();
 
             services.AddTransient<IRepository<IAddress>, GeolocationContext>();
 
@@ -115,7 +118,7 @@ namespace Geolocation.App
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GeolocationContext context)
         {
             var cultureInfo = new CultureInfo("ru-RU");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -128,8 +131,7 @@ namespace Geolocation.App
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Geolocation.App v1"));
             }
 
-            using var service = app.ApplicationServices.CreateScope();
-            service.ServiceProvider.GetService<GeolocationContext>()!.Database.Migrate();
+            context.Database.Migrate();
 
             app.UseRouting();
 
