@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Dapper;
 using Geolocation.Domain.Interfaces;
+using Geolocation.Infrastructure.Entities;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 
@@ -21,11 +22,15 @@ namespace Geolocation.Infrastructure
 
         }
 
-        public async Task<int> CheckStateDatabase(string keyPayment)
+        public async Task<int> NewAddress(IAddress address)
         {
+            var parameters = new AddressEntity
+            {
+                Value = address.Value
+            };
             using var connection = CreateConnection();
 
-            var paymentParams = await QueryAsync(connection, "CheckStateDatabase", keyPayment,
+            var paymentParams = await QueryAsync(connection, "Geolocation_Address_add", parameters,
                 commandType: CommandType.StoredProcedure);
             return paymentParams.First();
         }
@@ -64,11 +69,11 @@ namespace Geolocation.Infrastructure
             }
             catch (Exception e)
             {
-                throw new Exception("Ошибка БД", e) {Data = {{"Query", command}}};
-
+                throw new Exception($"Ошибка БД ({e.Message})", e) {Data = {{"Query", command}}};
             }
 
         }
+
     }
 
 

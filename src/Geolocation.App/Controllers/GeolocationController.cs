@@ -47,9 +47,9 @@ namespace Geolocation.App.Controllers
         [HttpPost]
         [ProducesDefaultResponseType(typeof(ProblemDetails))]
         [ProducesResponseType( StatusCodes.Status200OK)]
-        public async Task<IActionResult> CheckStateDatabase(string body)
+        public async Task<IActionResult> Insert(AddressDto body)
         {
-            await _contextSql.CheckStateDatabase(body);
+            await _contextSql.NewAddress(body);
             return Ok();
         }
     }

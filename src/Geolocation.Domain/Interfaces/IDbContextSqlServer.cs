@@ -4,6 +4,6 @@ namespace Geolocation.Domain.Interfaces
 {
     public interface IDbContextSqlServer
     {
-        public Task<int> CheckStateDatabase(string @keyPayment);
+        public Task<int> NewAddress(IAddress address);
     }
 }
