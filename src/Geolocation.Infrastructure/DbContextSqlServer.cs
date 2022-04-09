@@ -22,6 +22,11 @@ namespace Geolocation.Infrastructure
 
         }
 
+        /// <summary>
+        /// exec Geolocation_Address_add
+        /// </summary>
+        /// <param name="address">params <see cref="AddressEntity"/></param>
+        /// <returns></returns>
         public async Task<int> NewAddress(IAddress address)
         {
             var parameters = new AddressEntity
@@ -69,7 +74,7 @@ namespace Geolocation.Infrastructure
             }
             catch (Exception e)
             {
-                throw new Exception($"Ошибка БД ({e.Message})", e) {Data = {{"Query", command}}};
+                throw new Exception($"Fault Database ({e.Message})", e) {Data = {{"Query", command}}};
             }
 
         }
