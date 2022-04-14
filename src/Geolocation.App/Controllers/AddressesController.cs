@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Geolocation.Domain.Dto;
 using Geolocation.Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace Geolocation.App.Controllers
 {
@@ -15,10 +16,13 @@ namespace Geolocation.App.Controllers
         private readonly IRepository<IAddress> _context;
 
         private readonly IRunner _job;
-        public AddressesController(IRepository<IAddress> context, IRunner job)
+        private readonly ILogger<AddressesController> _logger;
+
+        public AddressesController(IRepository<IAddress> context, IRunner job, ILogger<AddressesController> logger)
         {
             _context = context;
             _job = job;
+            _logger = logger;
         }
 
         /// <summary>
@@ -29,6 +33,7 @@ namespace Geolocation.App.Controllers
         [ProducesResponseType(typeof(IEnumerable<IAddress>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
+            _logger.LogWarning("Use get {@User}", HttpContext.User?.Identity);
             var result = await _context.Get();
             return Ok(result);
         }

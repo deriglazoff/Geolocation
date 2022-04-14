@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Geolocation.Authentication\Geolocation.Authentication.csproj" />
     <ProjectReference Include="..\Geolocation.Domain\Geolocation.Domain.csproj" />
     <ProjectReference Include="..\Geolocation.Infrastructure\Geolocation.Infrastructure.csproj" />
 

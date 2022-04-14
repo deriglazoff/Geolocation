@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,9 +14,9 @@ using Dadata;
 using Geolocation.App.Example;
 using Geolocation.App.Filter;
 using Geolocation.App.Jobs;
+using Geolocation.Authentication;
 using Geolocation.Domain.Interfaces;
 using Geolocation.Infrastructure;
-using Geolocation.Infrastructure.Interceptors;
 using Geolocation.Infrastructure.Saga;
 using MassTransit;
 using MassTransit.Definition;
@@ -45,6 +46,8 @@ namespace Geolocation.App
             services.Configure<AppSetting>(Configuration);
             var configuration = Configuration.Get<AppSetting>();
 
+            services.AddBasicAuthentication();
+            
             services.AddHttpClient<SuggestClientAsync>().AddTransientHttpErrorPolicy(policyBuilder =>
                 policyBuilder.WaitAndRetryAsync(2, retryNumber => TimeSpan.FromSeconds(1)));
 
