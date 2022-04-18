@@ -21,6 +21,7 @@ namespace Geolocation.Gateway
         private readonly DataContext _context;
         private readonly AppSettings _appSettings;
 
+        //TODO single project
         public UserService(
             DataContext context,
             IOptions<AppSettings> appSettings)
