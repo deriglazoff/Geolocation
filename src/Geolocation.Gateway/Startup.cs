@@ -13,7 +13,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Geolocation.Domain.Interfaces;
 using Geolocation.Infrastructure;
-using Geolocation.Infrastructure.Entities;
 using Geolocation.Infrastructure.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -68,6 +67,7 @@ namespace Geolocation.Gateway
                     };
                 });
 
+            services.AddHealthChecks();
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.IgnoreNullValues = true);
 
             services.AddSwaggerGen(c => {
@@ -100,6 +100,7 @@ namespace Geolocation.Gateway
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = GetType().Namespace, Version = "v1" });
                 var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
                 xmlFiles.ForEach(xmlFile => c.IncludeXmlComments(xmlFile));
+                //c.AddServer(new OpenApiServer {Url = Configuration["ASPNETCORE_URLS"]});
             });
         }
 
@@ -126,9 +127,10 @@ namespace Geolocation.Gateway
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("checkState");
                 endpoints.MapControllers();
                 endpoints.MapReverseProxy();
             });
