@@ -1,0 +1,35 @@
+﻿
+<MudTable Items="@Data" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" 
+          LoadingProgressColor="Color.Info" Dense="true" 
+          Filter="new Func<AddressViewModel,bool>(FilterFunc)" 
+          >
+    <ToolBarContent>
+       <MudText Typo="Typo.h6">Data</MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"/>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortBy="new Func<AddressViewModel, object>(x => x.Date)">CorrelationId</MudTableSortLabel></MudTh>
+        <MudTh>Date</MudTh>
+        <MudTh>Value</MudTh>
+        <MudTh>Action</MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context.CorrelationId</MudTd>
+        <MudTd DataLabel="Sign">@context.Date</MudTd>
+        <MudTd DataLabel="Molar mass">@context.Value</MudTd>
+
+        <MudTd DataLabel="Действия">
+            <MudIconButton Color="Color.Info" Size="Size.Medium" Icon="@Icons.Material.Filled.FolderOpen" OnClick="_ => EditClick(context)"></MudIconButton>
+            <MudIconButton Color="Color.Error" Size="Size.Medium" Icon="@Icons.Material.Filled.Delete" OnClick="_ => RemoveClick(context)"></MudIconButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+        <MudTablePager/>
+        
+        
+        <div class="col-md-12 text-center">
+            <MudButton Size="Size.Small" Variant="Variant.Outlined"OnClick="@(async ()=>await Refresh())">Показать больше</MudButton>
+        </div>
+    </PagerContent>
+</MudTable>

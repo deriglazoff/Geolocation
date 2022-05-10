@@ -1,19 +1,45 @@
 ﻿@inherits LayoutComponentBase
 
-<PageTitle>Geolocation.UI</PageTitle>
+<MudLayout>
+    <MudAppBar Elevation="1" Dense="@dense">
+        <MudDialogProvider/>
+        <MudSnackbarProvider/>
+        <MudThemeProvider IsDarkMode="true"/>
+        <MudAvatar Color="Color.Tertiary">DV</MudAvatar>
+        <MudSpacer />
+        <MudMenu ActivationEvent="@MouseEvent.MouseOver" Size="Size.Large" AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopRight">
+            <ActivatorContent>
+                <MudAvatar Color="Color.Tertiary">DV</MudAvatar>
+            </ActivatorContent>
+            <ChildContent>
+                <MudMenuItem Disabled="true">User</MudMenuItem>
+                <MudMenuItem>Profile</MudMenuItem>
+                <MudMenuItem>Sign Out</MudMenuItem>
+            </ChildContent>
+        </MudMenu>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
-
-        <article class="content px-4">
+    </MudAppBar>
+    @*    <MudDrawer @bind-Open="@_drawerOpen" Fixed="true" Elevation="1"DisableOverlay="false" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false">*@
+    <MudDrawer @bind-Open="@_drawerOpen" Fixed="true" Elevation="1"DisableOverlay="false" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@DrawerToggle" />
+        <NavMenu/>
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.ExtraLarge">
             @Body
-        </article>
-    </main>
-</div>
+        </MudContainer>
+
+    </MudMainContent>
+
+</MudLayout>
+
+
+
+@code {
+    bool _drawerOpen = false;
+    bool dense = true;
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}

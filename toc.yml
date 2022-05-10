@@ -3,4 +3,4 @@
 - name: API Documentation
   href: obj/api/
 - name: REST API
-  href: src/Push.Client/swagger.html
+  href: src/Geolocation.Client/swagger.html

@@ -1,13 +1,14 @@
 using Geolocation.Client;
+using Geolocation.UI.ModelsView;
 
 namespace Geolocation.UI.Data
 {
-    public class WeatherForecastService
+    public class AddressService
     {
         private readonly IGeolocation_Client _client;
 
 
-        public WeatherForecastService(IGeolocation_Client client)
+        public AddressService(IGeolocation_Client client)
         {
             _client = client;
         }
