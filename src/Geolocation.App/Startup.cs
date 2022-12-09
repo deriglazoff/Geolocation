@@ -75,7 +75,6 @@ namespace Geolocation.App
 
             services.AddMassTransit(x =>
             {
-
                 x.AddSagaStateMachine<AddressStateMachine, AddressSaga>(typeof(AddressSagaDefinition))
                     .EntityFrameworkRepository(r =>
                     {
@@ -99,7 +98,7 @@ namespace Geolocation.App
             {
                 o.SerializerSettings.Converters.Add(new StringEnumConverter());
                 o.SerializerSettings.Culture = new CultureInfo("ru-RU");
-            });
+            }).AddXmlDataContractSerializerFormatters().AddXmlSerializerFormatters();
 
             services.AddSwaggerGen(options =>
             {
