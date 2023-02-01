@@ -38,6 +38,6 @@
     },
     "markdownEngineName": "markdig",
     "dest": "_site"
-    //"C:\Users\deriglazov.v\source\repos\documentation\docfx\docfx.exe" docfx.json -t "default,templates/darkfx" --serve
+    //"C:\Users\kredi\source\repos\deriglazoff\documentation\docfx\docfx.exe" docfx.json -t "default,templates/darkfx" --serve
   }
 }

@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geolocation.Test", "Geoloca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geolocation.Gateway", "Geolocation.Gateway\Geolocation.Gateway.csproj", "{FC11859E-1201-4996-8470-E0893C228659}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geolocation.UI", "Geolocation.UI\Geolocation.UI.csproj", "{EB7E8F00-F833-4E7B-8683-6796D2843641}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geolocation.UI", "Geolocation.UI\Geolocation.UI.csproj", "{EB7E8F00-F833-4E7B-8683-6796D2843641}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlowChartTemplate", "..\FlowChartTemplate\FlowChartTemplate.csproj", "{56DDCBCB-15F4-4E58-8AC9-C9E09FDBC928}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{EB7E8F00-F833-4E7B-8683-6796D2843641}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB7E8F00-F833-4E7B-8683-6796D2843641}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB7E8F00-F833-4E7B-8683-6796D2843641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56DDCBCB-15F4-4E58-8AC9-C9E09FDBC928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56DDCBCB-15F4-4E58-8AC9-C9E09FDBC928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56DDCBCB-15F4-4E58-8AC9-C9E09FDBC928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56DDCBCB-15F4-4E58-8AC9-C9E09FDBC928}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
