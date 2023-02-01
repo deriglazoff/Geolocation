@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class LogCommandInterceptor
+ | Geolocation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class LogCommandInterceptor
+ | Geolocation ">
+    <meta name="generator" content="docfx ">
+  
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor">
+
+
+  <h1 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor" class="text-break">Class LogCommandInterceptor
+</h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor">DbCommandInterceptor</a></div>
+    <div class="level2"><span class="xref">LogCommandInterceptor</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.idbcommandinterceptor">IDbCommandInterceptor</a></div>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.iinterceptor">IInterceptor</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.commandcreating#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-commandcreating(microsoft-entityframeworkcore-diagnostics-commandcorrelatedeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult((system-data-common-dbcommand)))">DbCommandInterceptor.CommandCreating(CommandCorrelatedEventData, InterceptionResult&lt;DbCommand&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.commandcreated#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-commandcreated(microsoft-entityframeworkcore-diagnostics-commandendeventdata-system-data-common-dbcommand)">DbCommandInterceptor.CommandCreated(CommandEndEventData, DbCommand)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.scalarexecuting#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-scalarexecuting(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult((system-object)))">DbCommandInterceptor.ScalarExecuting(DbCommand, CommandEventData, InterceptionResult&lt;object&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.nonqueryexecuting#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-nonqueryexecuting(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult((system-int32)))">DbCommandInterceptor.NonQueryExecuting(DbCommand, CommandEventData, InterceptionResult&lt;int&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.scalarexecutingasync#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-scalarexecutingasync(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult((system-object))-system-threading-cancellationtoken)">DbCommandInterceptor.ScalarExecutingAsync(DbCommand, CommandEventData, InterceptionResult&lt;object&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.nonqueryexecutingasync#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-nonqueryexecutingasync(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult((system-int32))-system-threading-cancellationtoken)">DbCommandInterceptor.NonQueryExecutingAsync(DbCommand, CommandEventData, InterceptionResult&lt;int&gt;, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.readerexecuted#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-readerexecuted(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandexecutedeventdata-system-data-common-dbdatareader)">DbCommandInterceptor.ReaderExecuted(DbCommand, CommandExecutedEventData, DbDataReader)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.scalarexecuted#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-scalarexecuted(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandexecutedeventdata-system-object)">DbCommandInterceptor.ScalarExecuted(DbCommand, CommandExecutedEventData, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.nonqueryexecuted#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-nonqueryexecuted(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandexecutedeventdata-system-int32)">DbCommandInterceptor.NonQueryExecuted(DbCommand, CommandExecutedEventData, int)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.readerexecutedasync#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-readerexecutedasync(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandexecutedeventdata-system-data-common-dbdatareader-system-threading-cancellationtoken)">DbCommandInterceptor.ReaderExecutedAsync(DbCommand, CommandExecutedEventData, DbDataReader, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.scalarexecutedasync#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-scalarexecutedasync(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandexecutedeventdata-system-object-system-threading-cancellationtoken)">DbCommandInterceptor.ScalarExecutedAsync(DbCommand, CommandExecutedEventData, object, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.nonqueryexecutedasync#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-nonqueryexecutedasync(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandexecutedeventdata-system-int32-system-threading-cancellationtoken)">DbCommandInterceptor.NonQueryExecutedAsync(DbCommand, CommandExecutedEventData, int, CancellationToken)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.datareaderdisposing#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-datareaderdisposing(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-datareaderdisposingeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult)">DbCommandInterceptor.DataReaderDisposing(DbCommand, DataReaderDisposingEventData, InterceptionResult)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <span class="xref">Geolocation</span>.<a class="xref" href="Geolocation.Infrastructure.html">Infrastructure</a>.<a class="xref" href="Geolocation.Infrastructure.Interceptors.html">Interceptors</a></h6>
+  <h6><strong>Assembly</strong>: Geolocation.Infrastructure.dll</h6>
+  <h5 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class LogCommandInterceptor : DbCommandInterceptor, IDbCommandInterceptor, IInterceptor</code></pre>
+  </div>
+
+  <h5 class="parameters">Properties</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a class="xref" href="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.html#Geolocation_Infrastructure_Interceptors_LogCommandInterceptor__ctor_Microsoft_Extensions_Logging_ILogger_Geolocation_Infrastructure_Interceptors_LogCommandInterceptor__">LogCommandInterceptor(ILogger&lt;LogCommandInterceptor&gt;)</a>
+        </td>
+        <td>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="parameters">Properties</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a class="xref" href="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.html#Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailed_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandErrorEventData_">CommandFailed(DbCommand, CommandErrorEventData)</a>
+        </td>
+        <td>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.html#Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailedAsync_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandErrorEventData_System_Threading_CancellationToken_">CommandFailedAsync(DbCommand, CommandErrorEventData, CancellationToken)</a>
+        </td>
+        <td>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.html#Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_GetGeneratedQuery_System_Data_Common_DbCommand_">GetGeneratedQuery(DbCommand)</a>
+        </td>
+        <td>
+        </td>
+        <td><p>TODO debug list params</p>
+</td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.html#Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecuting_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandEventData_Microsoft_EntityFrameworkCore_Diagnostics_InterceptionResult_System_Data_Common_DbDataReader__">ReaderExecuting(DbCommand, CommandEventData, InterceptionResult&lt;DbDataReader&gt;)</a>
+        </td>
+        <td>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <a class="xref" href="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.html#Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecutingAsync_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandEventData_Microsoft_EntityFrameworkCore_Diagnostics_InterceptionResult_System_Data_Common_DbDataReader__System_Threading_CancellationToken_">ReaderExecutingAsync(DbCommand, CommandEventData, InterceptionResult&lt;DbDataReader&gt;, CancellationToken)</a>
+        </td>
+        <td>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/deriglazoff/Geolocation/new/main/apiSpec/new?filename=Geolocation_Infrastructure_Interceptors_LogCommandInterceptor__ctor_Microsoft_Extensions_Logging_ILogger_Geolocation_Infrastructure_Interceptors_LogCommandInterceptor__.md&amp;value=---%0Auid%3A%20Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.%23ctor(Microsoft.Extensions.Logging.ILogger%7BGeolocation.Infrastructure.Interceptors.LogCommandInterceptor%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/deriglazoff/Geolocation/blob/main/src/Geolocation.Infrastructure/Interceptors/LogCommandInterceptor.cs/#L16">View Source</a>
+  </span>
+  <a id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor__ctor_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.#ctor*"></a>
+  <h4 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor__ctor_Microsoft_Extensions_Logging_ILogger_Geolocation_Infrastructure_Interceptors_LogCommandInterceptor__" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.#ctor(Microsoft.Extensions.Logging.ILogger{Geolocation.Infrastructure.Interceptors.LogCommandInterceptor})">LogCommandInterceptor(ILogger&lt;LogCommandInterceptor&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LogCommandInterceptor(ILogger&lt;LogCommandInterceptor&gt; logger)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.extensions.logging.ilogger-1">ILogger</a>&lt;<a class="xref" href="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.html">LogCommandInterceptor</a>&gt;</td>
+        <td><span class="parametername">logger</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/deriglazoff/Geolocation/new/main/apiSpec/new?filename=Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailed_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandErrorEventData_.md&amp;value=---%0Auid%3A%20Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.CommandFailed(System.Data.Common.DbCommand%2CMicrosoft.EntityFrameworkCore.Diagnostics.CommandErrorEventData)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/deriglazoff/Geolocation/blob/main/src/Geolocation.Infrastructure/Interceptors/LogCommandInterceptor.cs/#L41">View Source</a>
+  </span>
+  <a id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailed_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.CommandFailed*"></a>
+  <h4 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailed_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandErrorEventData_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.CommandFailed(System.Data.Common.DbCommand,Microsoft.EntityFrameworkCore.Diagnostics.CommandErrorEventData)">CommandFailed(DbCommand, CommandErrorEventData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void CommandFailed(DbCommand command, CommandErrorEventData eventData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbcommand">DbCommand</a></td>
+        <td><span class="parametername">command</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.commanderroreventdata">CommandErrorEventData</a></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.commandfailed#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-commandfailed(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commanderroreventdata)">DbCommandInterceptor.CommandFailed(DbCommand, CommandErrorEventData)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/deriglazoff/Geolocation/new/main/apiSpec/new?filename=Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailedAsync_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandErrorEventData_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.CommandFailedAsync(System.Data.Common.DbCommand%2CMicrosoft.EntityFrameworkCore.Diagnostics.CommandErrorEventData%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/deriglazoff/Geolocation/blob/main/src/Geolocation.Infrastructure/Interceptors/LogCommandInterceptor.cs/#L35">View Source</a>
+  </span>
+  <a id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailedAsync_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.CommandFailedAsync*"></a>
+  <h4 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_CommandFailedAsync_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandErrorEventData_System_Threading_CancellationToken_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.CommandFailedAsync(System.Data.Common.DbCommand,Microsoft.EntityFrameworkCore.Diagnostics.CommandErrorEventData,System.Threading.CancellationToken)">CommandFailedAsync(DbCommand, CommandErrorEventData, CancellationToken)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Task CommandFailedAsync(DbCommand command, CommandErrorEventData eventData, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbcommand">DbCommand</a></td>
+        <td><span class="parametername">command</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.commanderroreventdata">CommandErrorEventData</a></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.commandfailedasync#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-commandfailedasync(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commanderroreventdata-system-threading-cancellationtoken)">DbCommandInterceptor.CommandFailedAsync(DbCommand, CommandErrorEventData, CancellationToken)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/deriglazoff/Geolocation/new/main/apiSpec/new?filename=Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_GetGeneratedQuery_System_Data_Common_DbCommand_.md&amp;value=---%0Auid%3A%20Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.GetGeneratedQuery(System.Data.Common.DbCommand)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/deriglazoff/Geolocation/blob/main/src/Geolocation.Infrastructure/Interceptors/LogCommandInterceptor.cs/#L49">View Source</a>
+  </span>
+  <a id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_GetGeneratedQuery_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.GetGeneratedQuery*"></a>
+  <h4 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_GetGeneratedQuery_System_Data_Common_DbCommand_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.GetGeneratedQuery(System.Data.Common.DbCommand)">GetGeneratedQuery(DbCommand)</h4>
+  <div class="markdown level1 summary"><p>TODO debug list params</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static string GetGeneratedQuery(DbCommand dbCommand)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbcommand">DbCommand</a></td>
+        <td><span class="parametername">dbCommand</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/deriglazoff/Geolocation/new/main/apiSpec/new?filename=Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecuting_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandEventData_Microsoft_EntityFrameworkCore_Diagnostics_InterceptionResult_System_Data_Common_DbDataReader__.md&amp;value=---%0Auid%3A%20Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.ReaderExecuting(System.Data.Common.DbCommand%2CMicrosoft.EntityFrameworkCore.Diagnostics.CommandEventData%2CMicrosoft.EntityFrameworkCore.Diagnostics.InterceptionResult%7BSystem.Data.Common.DbDataReader%7D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/deriglazoff/Geolocation/blob/main/src/Geolocation.Infrastructure/Interceptors/LogCommandInterceptor.cs/#L20">View Source</a>
+  </span>
+  <a id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecuting_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.ReaderExecuting*"></a>
+  <h4 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecuting_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandEventData_Microsoft_EntityFrameworkCore_Diagnostics_InterceptionResult_System_Data_Common_DbDataReader__" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.ReaderExecuting(System.Data.Common.DbCommand,Microsoft.EntityFrameworkCore.Diagnostics.CommandEventData,Microsoft.EntityFrameworkCore.Diagnostics.InterceptionResult{System.Data.Common.DbDataReader})">ReaderExecuting(DbCommand, CommandEventData, InterceptionResult&lt;DbDataReader&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override InterceptionResult&lt;DbDataReader&gt; ReaderExecuting(DbCommand command, CommandEventData eventData, InterceptionResult&lt;DbDataReader&gt; result)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbcommand">DbCommand</a></td>
+        <td><span class="parametername">command</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.commandeventdata">CommandEventData</a></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.interceptionresult-1">InterceptionResult</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbdatareader">DbDataReader</a>&gt;</td>
+        <td><span class="parametername">result</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.interceptionresult-1">InterceptionResult</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbdatareader">DbDataReader</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.readerexecuting#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-readerexecuting(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult((system-data-common-dbdatareader)))">DbCommandInterceptor.ReaderExecuting(DbCommand, CommandEventData, InterceptionResult&lt;DbDataReader&gt;)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/deriglazoff/Geolocation/new/main/apiSpec/new?filename=Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecutingAsync_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandEventData_Microsoft_EntityFrameworkCore_Diagnostics_InterceptionResult_System_Data_Common_DbDataReader__System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.ReaderExecutingAsync(System.Data.Common.DbCommand%2CMicrosoft.EntityFrameworkCore.Diagnostics.CommandEventData%2CMicrosoft.EntityFrameworkCore.Diagnostics.InterceptionResult%7BSystem.Data.Common.DbDataReader%7D%2CSystem.Threading.CancellationToken)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/deriglazoff/Geolocation/blob/main/src/Geolocation.Infrastructure/Interceptors/LogCommandInterceptor.cs/#L27">View Source</a>
+  </span>
+  <a id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecutingAsync_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.ReaderExecutingAsync*"></a>
+  <h4 id="Geolocation_Infrastructure_Interceptors_LogCommandInterceptor_ReaderExecutingAsync_System_Data_Common_DbCommand_Microsoft_EntityFrameworkCore_Diagnostics_CommandEventData_Microsoft_EntityFrameworkCore_Diagnostics_InterceptionResult_System_Data_Common_DbDataReader__System_Threading_CancellationToken_" data-uid="Geolocation.Infrastructure.Interceptors.LogCommandInterceptor.ReaderExecutingAsync(System.Data.Common.DbCommand,Microsoft.EntityFrameworkCore.Diagnostics.CommandEventData,Microsoft.EntityFrameworkCore.Diagnostics.InterceptionResult{System.Data.Common.DbDataReader},System.Threading.CancellationToken)">ReaderExecutingAsync(DbCommand, CommandEventData, InterceptionResult&lt;DbDataReader&gt;, CancellationToken)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override ValueTask&lt;InterceptionResult&lt;DbDataReader&gt;&gt; ReaderExecutingAsync(DbCommand command, CommandEventData eventData, InterceptionResult&lt;DbDataReader&gt; result, CancellationToken cancellationToken = default)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbcommand">DbCommand</a></td>
+        <td><span class="parametername">command</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.commandeventdata">CommandEventData</a></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.interceptionresult-1">InterceptionResult</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbdatareader">DbDataReader</a>&gt;</td>
+        <td><span class="parametername">result</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken">CancellationToken</a></td>
+        <td><span class="parametername">cancellationToken</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.valuetask-1">ValueTask</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.interceptionresult-1">InterceptionResult</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.data.common.dbdatareader">DbDataReader</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.dbcommandinterceptor.readerexecutingasync#microsoft-entityframeworkcore-diagnostics-dbcommandinterceptor-readerexecutingasync(system-data-common-dbcommand-microsoft-entityframeworkcore-diagnostics-commandeventdata-microsoft-entityframeworkcore-diagnostics-interceptionresult((system-data-common-dbdatareader))-system-threading-cancellationtoken)">DbCommandInterceptor.ReaderExecutingAsync(DbCommand, CommandEventData, InterceptionResult&lt;DbDataReader&gt;, CancellationToken)</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.idbcommandinterceptor">Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor</a>
+  </div>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.entityframeworkcore.diagnostics.iinterceptor">Microsoft.EntityFrameworkCore.Diagnostics.IInterceptor</a>
+  </div>
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/deriglazoff/Geolocation/new/main/apiSpec/new?filename=Geolocation_Infrastructure_Interceptors_LogCommandInterceptor.md&amp;value=---%0Auid%3A%20Geolocation.Infrastructure.Interceptors.LogCommandInterceptor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/deriglazoff/Geolocation/blob/main/src/Geolocation.Infrastructure/Interceptors/LogCommandInterceptor.cs/#L12" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="toggle-mode">
+                <div class="icon">
+                  <i aria-hidden="true">☀</i>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="switch-style">
+                  <span class="slider round"></span>
+                </label>
+                <div class="icon">
+                  <i aria-hidden="true">☾</i>
+                </div>
+              </div>
+
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <h5>In This Article</h5>
+              <div></div>
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            <div class="pull-left">
+        
+        <span>Generated by <strong>DocFX</strong></span>
+            </div>
+            <div class="toggle-mode pull-right visible-sm visible-xs">
+              <div class="icon">
+                <i aria-hidden="true">☀</i>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="switch-style-m">
+                <span class="slider round"></span>
+              </label>
+              <div class="icon">
+                <i aria-hidden="true">☾</i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="../styles/toggle-theme.js"></script>
+      </footer>    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+    <!-- mermaid support -->
+    <script type="text/javascript" src="https://unpkg.com/mermaid@9.1.3/dist/mermaid.min.js" integrity="sha384-LnGjpNDrP4cp7MIk4CpRa/lPNclrf839ryYVFx1T1mPSV3RGAZ7nlBa7pqcyGY/K" crossorigin="anonymous"></script>
+    <!-- Initialize Mermaid -->
+    <script>
+        mermaid.initialize({
+            startOnLoad: false
+        });
+        mermaid.init(undefined, ".lang-mermaid");
+    </script>
+  </body>
+</html>
