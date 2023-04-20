@@ -45,7 +45,9 @@ namespace Geolocation.App
             var configuration = Configuration.Get<AppSetting>();
 
             //services.AddBasicAuthentication(); TODO cookie auth
-            
+            services.AddHttpLogging(x => x.LoggingFields = x.LoggingFields | Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestBody |
+            Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponseBody);
+
             services.AddHttpClient<SuggestClientAsync>().AddTransientHttpErrorPolicy(policyBuilder =>
                 policyBuilder.WaitAndRetryAsync(2, retryNumber => TimeSpan.FromSeconds(1)));
 
